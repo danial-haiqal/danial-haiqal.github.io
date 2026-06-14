@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-Portfolio | Muhammad Danial Haiqal | A214580</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0c29;
+            color: #e0e0e0;
+        }
+
+        /* NAV */
+        nav {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 16px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        nav .logo { font-size: 1.2rem; font-weight: 700; color: #a78bfa; }
+        nav ul { list-style: none; display: flex; gap: 24px; }
+        nav ul a { color: #ccc; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        nav ul a:hover { color: #a78bfa; }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #1a1a4e 0%, #2d1b69 50%, #1a1a4e 100%);
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .hero .avatar {
+            width: 100px; height: 100px;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem;
+        }
+        .hero h1 { font-size: 2rem; color: #fff; margin-bottom: 8px; }
+        .hero .matric { color: #a78bfa; font-size: 1rem; margin-bottom: 4px; }
+        .hero .subtitle { color: #ccc; font-size: 0.9rem; margin-bottom: 20px; }
+        .sdg-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* SECTIONS */
+        section { padding: 60px 40px; max-width: 1100px; margin: 0 auto; }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #a78bfa;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #a78bfa;
+        }
+
+        /* PROFILE CARD */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .profile-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(167,139,250,0.3);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .profile-card h3 { color: #a78bfa; margin-bottom: 12px; font-size: 1rem; }
+        .profile-card p { color: #ccc; font-size: 0.9rem; line-height: 1.6; }
+        .info-row { display: flex; gap: 8px; margin-bottom: 8px; }
+        .info-label { color: #a78bfa; font-size: 0.85rem; min-width: 120px; }
+        .info-value { color: #e0e0e0; font-size: 0.85rem; }
+
+        /* LAB CARDS */
+        .lab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .lab-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(167,139,250,0.2);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .lab-card:hover { transform: translateY(-4px); border-color: #a78bfa; }
+        .lab-card .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        .lab-card .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+        .lab-card .card-body { padding: 16px; }
+        .lab-card .card-title { color: #a78bfa; font-weight: 700; margin-bottom: 6px; }
+        .lab-card .card-desc { color: #ccc; font-size: 0.85rem; line-height: 1.5; }
+        .lab-badge {
+            display: inline-block;
+            background: rgba(167,139,250,0.2);
+            color: #a78bfa;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+        }
+
+        /* PROJECT CARDS */
+        .project-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(167,139,250,0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .project-card .project-header {
+            background: linear-gradient(135deg, #2d1b69, #1a1a4e);
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .project-card .project-header h3 { color: #fff; font-size: 1.2rem; }
+        .project-card .project-header .project-badge {
+            background: #a78bfa;
+            color: #1a1a4e;
+            padding: 4px 14px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .project-card .project-body { padding: 24px; }
+        .project-card .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .project-card .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+        .project-links { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.8; }
+        .btn-github { background: #333; color: #fff; }
+        .btn-youtube { background: #ff0000; color: #fff; }
+        .features-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .feature-tag {
+            background: rgba(167,139,250,0.15);
+            border: 1px solid rgba(167,139,250,0.3);
+            color: #a78bfa;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+        .lessons { color: #ccc; font-size: 0.9rem; line-height: 1.7; margin-top: 12px; }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+        }
+        .skill-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(167,139,250,0.2);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+        .skill-card:hover { border-color: #a78bfa; }
+        .skill-card .skill-icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .skill-card .skill-name { color: #e0e0e0; font-size: 0.85rem; font-weight: 600; }
+
+        /* REFLECTION */
+        .reflection-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(167,139,250,0.3);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .reflection-card h3 { color: #a78bfa; margin-bottom: 12px; }
+        .reflection-card p { color: #ccc; line-height: 1.8; font-size: 0.9rem; }
+
+        /* RESOURCES */
+        .resource-list { list-style: none; }
+        .resource-list li {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(167,139,250,0.2);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .resource-list li span { color: #a78bfa; font-weight: 600; }
+
+        /* FOOTER */
+        footer {
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .profile-grid { grid-template-columns: 1fr; }
+            nav ul { gap: 12px; }
+            section { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="logo">💧 MINUMNOW e-Portfolio</div>
+    <ul>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#labs">Labs</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#reflection">Reflection</a></li>
+        <li><a href="#skills">Skills</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="avatar">💧</div>
+    <h1>Muhammad Danial Haiqal</h1>
+    <p class="matric">A214580</p>
+    <p class="subtitle">TK2323/TM2213 Mobile Programming | Instructor: Dr. Nazatul Aini</p>
+    <div class="sdg-badge">🌍 SDG 3 — Good Health & Well-being</div>
+</div>
+
+<!-- PROFILE -->
+<section id="profile">
+    <h2 class="section-title">👤 Student Profile</h2>
+    <div class="profile-grid">
+        <div class="profile-card">
+            <h3>Personal Information</h3>
+            <div class="info-row"><span class="info-label">Name</span><span class="info-value">Muhammad Danial Haiqal</span></div>
+            <div class="info-row"><span class="info-label">Matric No.</span><span class="info-value">A214580</span></div>
+            <div class="info-row"><span class="info-label">Course</span><span class="info-value">TK2323/TM2213 Mobile Programming</span></div>
+            <div class="info-row"><span class="info-label">Instructor</span><span class="info-value">Dr. Nazatul Aini</span></div>
+        </div>
+        <div class="profile-card">
+            <h3>Introduction & Learning Goals</h3>
+            <p>I am a mobile programming student passionate about building Android applications that make a positive impact. My goal is to master Jetpack Compose, MVVM architecture, and modern Android development practices to build real-world applications.</p>
+        </div>
+        <div class="profile-card">
+            <h3>🌍 SDG Theme</h3>
+            <p><strong style="color:#a78bfa">SDG 3 — Good Health & Well-being</strong><br><br>
+            My app MINUMNOW promotes healthy hydration habits by helping users track their daily water intake, contributing to better personal health and well-being.</p>
+        </div>
+        <div class="profile-card">
+            <h3>📱 App Overview</h3>
+            <p>MINUMNOW is a water intake tracking Android app built with Jetpack Compose. It features local storage, cloud sync, live weather data, and GPS integration to provide personalized hydration advice.</p>
+        </div>
+    </div>
+</section>
+
+<!-- LABS -->
+<section id="labs">
+    <h2 class="section-title">🧪 Lab Submissions</h2>
+    <div class="lab-grid">
+
+        <div class="lab-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/nRgGQeMUUuI" allowfullscreen></iframe>
+            </div>
+            <div class="card-body">
+                <div class="lab-badge">Lab 1</div>
+                <div class="card-title">UI Fundamentals</div>
+                <div class="card-desc">Introduction to Jetpack Compose, building basic UI components and understanding composable functions.</div>
+                <p style="color:#888;font-size:0.8rem;margin-top:8px;">💡 Learned how declarative UI differs from traditional XML layouts.</p>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/F4qGV9XvZds" allowfullscreen></iframe>
+            </div>
+            <div class="card-body">
+                <div class="lab-badge">Lab 2</div>
+                <div class="card-title">Interaction & State</div>
+                <div class="card-desc">Handling user interactions, managing state with remember and mutableStateOf in Compose.</div>
+                <p style="color:#888;font-size:0.8rem;margin-top:8px;">💡 Understood how state drives UI recomposition in Compose.</p>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/CDZ3cplQeJg" allowfullscreen></iframe>
+            </div>
+            <div class="card-body">
+                <div class="lab-badge">Lab 3</div>
+                <div class="card-title">Material Design</div>
+                <div class="card-desc">Implementing Material Design 3 components, theming, color schemes, and typography.</div>
+                <p style="color:#888;font-size:0.8rem;margin-top:8px;">💡 Applied SDG 3 purple/indigo theme consistently across screens.</p>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/kTBqlulWr5M" allowfullscreen></iframe>
+            </div>
+            <div class="card-body">
+                <div class="lab-badge">Lab 4</div>
+                <div class="card-title">Navigation</div>
+                <div class="card-desc">Implementing Navigation Compose with multiple screens, routes, and BottomNav bar.</div>
+                <p style="color:#888;font-size:0.8rem;margin-top:8px;">💡 Mastered NavController and NavHost for multi-screen navigation.</p>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/6b5Eb-Otazs" allowfullscreen></iframe>
+            </div>
+            <div class="card-body">
+                <div class="lab-badge">Lab 5</div>
+                <div class="card-title">Room Database</div>
+                <div class="card-desc">Implementing local data persistence with Room Database, DAO, Entity, and Repository pattern.</div>
+                <p style="color:#888;font-size:0.8rem;margin-top:8px;">💡 Understood how Room abstracts SQLite with compile-time SQL verification.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <h2 class="section-title">🚀 Project Submissions</h2>
+
+    <!-- PROJECT 1 -->
+    <div class="project-card">
+        <div class="project-header">
+            <h3>💧 MINUMNOW — Project 1</h3>
+            <span class="project-badge">Project 1</span>
+        </div>
+        <div class="project-body">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/UJfzGVQ_sto" allowfullscreen></iframe>
+            </div>
+            <p style="color:#ccc;margin-bottom:12px;font-size:0.9rem;"><strong style="color:#a78bfa">Problem Statement:</strong> Many people forget to track their daily water intake, leading to dehydration and health issues. MINUMNOW provides a simple, visually engaging way to log and monitor hydration.</p>
+            <div class="project-links">
+                <a href="https://youtu.be/UJfzGVQ_sto" target="_blank" class="btn btn-youtube">▶ Watch VSR</a>
+            </div>
+            <div class="features-list">
+                <span class="feature-tag">Jetpack Compose</span>
+                <span class="feature-tag">Navigation</span>
+                <span class="feature-tag">ViewModel</span>
+                <span class="feature-tag">Material Design 3</span>
+                <span class="feature-tag">SDG 3</span>
+            </div>
+            <p class="lessons"><strong style="color:#a78bfa">Lessons Learned:</strong> Built a complete multi-screen app using Jetpack Compose and MVVM. Learned how to share state between screens using ViewModel and implement a custom dark theme.</p>
+        </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card">
+        <div class="project-header">
+            <h3>💧 MINUMNOW — Project 2</h3>
+            <span class="project-badge">Project 2</span>
+        </div>
+        <div class="project-body">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/-lxTbOOWsv4" allowfullscreen></iframe>
+            </div>
+            <p style="color:#ccc;margin-bottom:12px;font-size:0.9rem;"><strong style="color:#a78bfa">Problem Statement:</strong> Extending MINUMNOW with advanced features — local persistence, cloud sync, live weather data, and GPS integration to provide a fully connected hydration tracking experience aligned with SDG 3.</p>
+            <div class="project-links">
+                <a href="https://github.com/danial-haiqal/A214580_MuhammadDanialHaiqal_DrNazatulAini_Project2" target="_blank" class="btn btn-github">⭐ GitHub Repo</a>
+                <a href="https://youtu.be/-lxTbOOWsv4" target="_blank" class="btn btn-youtube">▶ Watch VSR</a>
+            </div>
+            <div class="features-list">
+                <span class="feature-tag">Room Database</span>
+                <span class="feature-tag">Firebase Firestore</span>
+                <span class="feature-tag">Retrofit API</span>
+                <span class="feature-tag">GPS Sensor</span>
+                <span class="feature-tag">7 Screens</span>
+                <span class="feature-tag">MVVM</span>
+                <span class="feature-tag">Jetpack Compose</span>
+                <span class="feature-tag">SDG 3</span>
+            </div>
+            <p class="lessons"><strong style="color:#a78bfa">Lessons Learned:</strong> Integrated four advanced technical pillars — Room for local persistence, Firebase Firestore for cloud storage, Retrofit for REST API calls, and GPS sensor for location data. Learned how these technologies work together in a real-world Android app.</p>
+        </div>
+    </div>
+</section>
+
+<!-- REFLECTION -->
+<section id="reflection">
+    <h2 class="section-title">💭 Reflection & Learning Journey</h2>
+
+    <div class="reflection-card">
+        <h3>📈 Growth from Lab 1 to Project 2</h3>
+        <p>My journey began with Lab 1 where I first encountered Jetpack Compose and struggled with understanding the declarative UI paradigm. By Project 2, I was confidently building 7-screen applications with MVVM architecture, integrating multiple data sources, and working with hardware sensors. The progression from simple UI components to a fully connected, hardware-aware application has been remarkable.</p>
+    </div>
+
+    <div class="reflection-card">
+        <h3>⚡ Challenges Faced</h3>
+        <p>The most challenging aspect was integrating Firebase Firestore while managing asynchronous callbacks alongside Jetpack Compose's reactive UI. Understanding how to bridge Firestore's callback-based API with Compose's state system required deep understanding of coroutines and side effects. Setting up proper Gradle dependencies and resolving version conflicts between Room, Firebase, and Retrofit was also a significant challenge that taught me about Android's dependency management system.</p>
+    </div>
+
+    <div class="reflection-card">
+        <h3>🌍 SDG 3 Impact</h3>
+        <p>MINUMNOW directly supports SDG 3 — Good Health and Well-being by promoting one of the simplest yet most impactful health habits: adequate daily hydration. By providing real-time weather-based hydration advice, the app personalizes recommendations based on environmental conditions. The community tips feature encourages knowledge sharing about healthy hydration practices, creating a collective health-conscious community.</p>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <h2 class="section-title">🛠️ Skills & Tech Stack</h2>
+    <div class="skills-grid">
+        <div class="skill-card"><div class="skill-icon">🎨</div><div class="skill-name">Jetpack Compose</div></div>
+        <div class="skill-card"><div class="skill-icon">🏗️</div><div class="skill-name">MVVM Architecture</div></div>
+        <div class="skill-card"><div class="skill-icon">🗄️</div><div class="skill-name">Room Database</div></div>
+        <div class="skill-card"><div class="skill-icon">☁️</div><div class="skill-name">Firebase Firestore</div></div>
+        <div class="skill-card"><div class="skill-icon">🌐</div><div class="skill-name">Retrofit REST API</div></div>
+        <div class="skill-card"><div class="skill-icon">📍</div><div class="skill-name">GPS Sensor</div></div>
+        <div class="skill-card"><div class="skill-icon">🧭</div><div class="skill-name">Navigation Compose</div></div>
+        <div class="skill-card"><div class="skill-icon">🔄</div><div class="skill-name">Kotlin Coroutines</div></div>
+        <div class="skill-card"><div class="skill-icon">📊</div><div class="skill-name">StateFlow / Flow</div></div>
+        <div class="skill-card"><div class="skill-icon">🎯</div><div class="skill-name">Material Design 3</div></div>
+        <div class="skill-card"><div class="skill-icon">🐙</div><div class="skill-name">GitHub</div></div>
+        <div class="skill-card"><div class="skill-icon">📱</div><div class="skill-name">Android Studio</div></div>
+    </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+    <h2 class="section-title">📚 Resources & References</h2>
+    <ul class="resource-list">
+        <li><span>REST API:</span> Open-Meteo API (https://api.open-meteo.com) — Free weather API, no key required</li>
+        <li><span>Cloud:</span> Firebase Firestore — Google's NoSQL cloud database for community tips feature</li>
+        <li><span>Library:</span> Retrofit 2.11.0 — Type-safe HTTP client for Android</li>
+        <li><span>Library:</span> Room 2.7.1 — Android local database persistence library</li>
+        <li><span>Library:</span> Google Play Services Location 21.3.0 — FusedLocationProviderClient for GPS</li>
+        <li><span>Documentation:</span> Android Developers (developer.android.com) — Official Jetpack Compose docs</li>
+        <li><span>AI Assistance:</span> Claude AI (Anthropic) — Used for code guidance, debugging, and implementation advice during development</li>
+    </ul>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>💧 MINUMNOW e-Portfolio | Muhammad Danial Haiqal | A214580 | SDG 3 — Good Health & Well-being</p>
+    <p style="margin-top:8px;">TK2323/TM2213 Mobile Programming | Dr. Nazatul Aini | 2026</p>
+</footer>
+
+</body>
+</html>
